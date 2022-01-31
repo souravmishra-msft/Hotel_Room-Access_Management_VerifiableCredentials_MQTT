@@ -85,6 +85,8 @@ To fix this error, comment out lines 109 to 111 in the `validator.js` inside `no
 
 **Note:** The ESP8266 device for this project is just blinking an LED light depicting the lock and unlock status. If the LED is ON, it depicts the lock status is unlocked, and if the LED is OFF, it depicts the lock status is locked.
 
+![esp8266-device](./ReadmeFiles/ESP8266-Door-Lock-Device.png)
+
 ## What we learned
 Things we learned while working on this project are:
 - Configuring Verifiable Credentials in Azure AD.
