@@ -102,9 +102,11 @@ void setup() {
 
 void callback(char* topic, byte* payload, unsigned int length)
 {
+    Serial.println();
     Serial.print("Message received in topic: ");
     Serial.println(topic);
     Serial.print("Message received from broker:");
+    Serial.println();
     payload[length] = 0;
     char *msg_payload = (char *)payload;
     // Split the payload in two values
