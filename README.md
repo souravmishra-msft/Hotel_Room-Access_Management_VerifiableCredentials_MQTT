@@ -24,7 +24,7 @@ There is no physical contact required here, as all magic happens through your pe
 
 ## How it works:
 Microsoft Verifiable Credentials, consists of three parts, an issuer, a wallet (to store the credentials) and a verifier.
-
+![diagram of an issuer and a verifier](./ReadmeFiles/VC-1.png)
 For setting up Microsoft Verified Credentials, please refer to the [documentation](https://aka.ms/didfordevs) for more details.
 
 This prototype, contains:
@@ -33,6 +33,7 @@ This prototype, contains:
 - A Door lock/unlock mechanism - Acts as the verifier
 
 This prototype makes use of the Microsoft Verified Credential APIs:
+![VC-API-Diagram](./ReadmeFiles/VC-API-Call.png)
 
 ## Steps involved for self-check-in
 - During the room booking process, on the hotel's website, the user had already verified himself/herself and verification a verifiable credential generated, i.e. a QR Code that can be scanned by the user using the Microsoft Authenticator App on the mobile device and store the VC in the authenticator app (the wallet).
@@ -46,6 +47,8 @@ This prototype makes use of the Microsoft Verified Credential APIs:
 ## How we built it
 
 ### Architecture Diagram
+
+![architecture-diagram](./ReadmeFiles/Architecture-Diagram.png)
 
 - The kiosk application calls the verified-credentials APIs. Upon receiving successfully response, it sends the data to the esp8266 micro-controller device connected on each door to either lock or unlock the door.
 
