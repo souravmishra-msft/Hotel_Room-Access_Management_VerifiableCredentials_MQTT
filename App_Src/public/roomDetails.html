@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hotel - KIOSK</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous"> <!-- load fontawesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom" style="background-color: #131212;">
+        <a class="navbar-brand navbar-text" href="/"><img src="/images/logo-1.gif" width="60" height="60" > The Hotel</a>
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="line"></span> 
+            <span class="line"></span> 
+            <span class="line" style="margin-bottom: 0;"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">  
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> 
+
+            </ul>         
+
+        </div>
+    </nav>
+
+     <div id="wrap">
+        <div style="text-align: center;">
+            <img src="/images/cloudcity.gif" height="30%" width="30%">
+            <h1>Welcome to The Hotel</h1>
+            <hr>
+        
+            <div class="container">
+                
+                <div class="details-card">
+                    <div class="details-box">
+                        <h1>Room Details</h1>
+                        <hr>
+                        <ul style="list-style-type:none;">
+                            <li>Guest Name : <span id="name"></span></li>
+                            <li>Room No.   : <span id="room"></span></li>
+                            <!-- <li>Access-Card Status.   : </li> -->
+                        </ul>
+                        <hr>
+                        <div id="btn-set">
+                            <button id="verify-access" class="button"><i class="fas fa-door-open"></i> Access-Room</button>
+                            <button id="unlock-room-btn" class="button"><i class="fas fa-unlock-alt"></i> Unlock</button>
+                            <button id="lock-room-btn" class="button"><i class="fas fa-lock"></i> Lock</button>
+                            <button id="back-home-btn" class="button" onclick="location.href='/'" style="display: none;"><i class="fas fa-home"></i></button>
+                        </div>
+                    </div>
+                    <div class="qr-box">
+                        
+                         <div id="qrText"  style="display: none;">
+                            <p class="small-text">
+                                <img src="/images/AuthenticatorLogo-2.png" alt="Authenticator icon" class="icon-small">
+                                <br>
+                                Scan with Microsoft Authenticator to get Room Details
+                            </p>
+                        </div>
+                        <a id="deeplink" style="display: none;margin-top: 10px;">Tap to open Authenticator on mobile</a>
+                        <div id="qrcode" class="qrcode-room-access"></div>
+
+                        <div id="message-wrapper" class="message-wrapper-room-details">
+                            <div id="status-icon"></div>
+                            <div id="message"></div>
+                            <div id="room-status" style="display: none;">
+                                <p id="small-text">Room Status: <span id="door-status"></span></p>
+                            </div>
+                            <div id="btn-set"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div> 
+        
+
+    <div class="footer">
+        <p>Verified Credentials powered Room Access Management System</p>
+    </div>
+
+    <!-- Bootstrap Scripts  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="/js/qrcode.min.js"></script>
+    <script>
+        const verifyAccess = document.getElementById('verify-access');
+        
+        const qrcodeRoom = new QRCode("qrcode", { width: 200, height: 200 });
+        let respPresentationReq = null;
+        let status = null;
+        let room = null;
+        
+        verifyAccess.addEventListener('click', () => {
+            fetch('/api/verifier/presentation-request')
+            .then((response)=> {
+                response.text()
+                .catch(error => document.getElementById("message").innerHTML = error)
+                .then((message) => {
+                    respPresentationReq = JSON.parse(message);
+                    if( /Android/i.test(navigator.userAgent) ) {
+                        console.log(`Android device! Using deep link (${respPresentationReq.url}).`);
+                        window.location.href = respPresentationReq.url; setTimeout( () => {
+                        window.location.href = "https://play.google.com/store/apps/details?id=com.azure.authenticator"; }, 2000);
+                    } else if (/iPhone/i.test(navigator.userAgent)) {
+                        console.log(`iOS device! Using deep link (${respPresentationReq.url}).`);
+                        window.location.replace(respPresentationReq.url);
+                    } else {
+                        console.log(`Not Android or IOS. Generating QR code encoded with ${message}`);
+                        // localStorage.setItem("qr-url", JSON.stringify(respPresentationReq.url));
+                        qrcodeRoom.makeCode(respPresentationReq.url);
+                        // document.getElementById('verify-access').style.visibility = "hidden";
+                        document.getElementById('qrText').style.display = "block";
+                    }
+                }).catch(error => { console.log(error.message); })
+            }).catch(error => { console.log(error.message); })
+            let checkStatus = setInterval(() => {
+                fetch('api/verifier/presentation-response?id=' + respPresentationReq.id )
+                    .then(response => response.text())
+                    .catch(error => document.getElementById("message").innerHTML = error)
+                    .then(response => {
+                        if (response.length > 0) {
+                            //console.log(response)
+                            respMsg = JSON.parse(response);
+                            // QR Code scanned
+                            if (respMsg.status == 'request_retrieved') {
+                                document.getElementById('message-wrapper').style.display = "block";
+                                document.getElementById('status-icon').innerHTML = `<img src="/images/qr-code-scan.gif" width="200" height="200" >`;
+                                document.getElementById('qrText').style.display = "none";
+                                document.getElementById('qrcode').style.display = "none";
+                                document.getElementById('message').innerHTML = respMsg.message;
+                            }
+                            
+                            if (respMsg.status == 'presentation_verified') {
+                                status = respMsg.status;
+                                room = respMsg.payload[0].claims.rooms
+                                //console.log(`Status: ${status}`);
+                                sessionStorage.setItem('verifyStatus', status);
+                                sessionStorage.setItem('room', room);
+                                //console.log(`Payload: ${JSON.stringify(respMsg.payload)}`);
+                                document.getElementById('room').innerHTML = respMsg.payload[0].claims.rooms;
+                                document.getElementById('status-icon').innerHTML = `<img src="/images/tick.gif" width="200" height="200" >`;
+                                document.getElementById('message').innerHTML = respMsg.message;
+                                document.getElementById('name').innerHTML = `${respMsg.firstName} ${respMsg.lastName}`;
+                                document.getElementById('btn-set').appendChild(homeBtn);
+                                clearInterval(checkStatus);
+                            }
+                        }
+                    });
+            }, 3000); //change this to higher interval if you use ngrok to prevent overloading the free tier service
+        });
+
+        const unlockBtn = document.getElementById('unlock-room-btn');
+        const lockBtn = document.getElementById('lock-room-btn');
+        let url = "/lock_status_check";
+
+        /* Unlock the Door */
+        unlockBtn.addEventListener('click', () => {
+            let lock_state = "";
+            console.log(`Unlock Button Clicked`);
+            document.getElementById("room-status").style.display = "block";
+            status = sessionStorage.getItem('verifyStatus');
+            room = sessionStorage.getItem('room');
+            console.log(`Status: ${status}\nRoom: ${room}`);
+            if(status == "presentation_verified") {
+                lock_state = "ON";
+                document.getElementById("door-status").innerText = "ON";
+            } else {    
+                lock_state = "OFF";
+            }
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "lock_state": lock_state,
+                    "room": room
+                }),
+            }).then((response) => {
+                if(response.ok) {
+                    return response.json();
+                    
+                } else {
+                    throw new Error(Error);
+                }
+            }).then((data) => {
+                console.log(data);
+                sessionStorage.clear();
+            }).catch((error) => {
+                console.log(error);
+            });
+            sessionStorage.clear();
+        });
+
+        /* Lock the Door */
+        lockBtn.addEventListener('click', () => {
+            let lock_state = "OFF";
+            console.log(`Lock Button Clicked`);
+            console.log(`Status: ${status}`);
+            document.getElementById("room-status").style.display = "block";
+            document.getElementById("door-status").innerText = lock_state;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "lock_state": lock_state,
+                    "room": ""
+                }),
+            }).then((response) => {
+                if(response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(Error);
+                }
+            }).then((data) => {
+                console.log(data);
+                sessionStorage.clear();
+            }).catch((error) => {
+                console.log(error);
+            });
+        });
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hotel - KIOSK</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous"> <!-- load fontawesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom" style="background-color: #131212;">
+        <a class="navbar-brand navbar-text" href="/"><img src="/images/logo-1.gif" width="60" height="60" > The Hotel</a>
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="line"></span> 
+            <span class="line"></span> 
+            <span class="line" style="margin-bottom: 0;"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">  
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> 
+
+            </ul>         
+
+        </div>
+    </nav>
+
+     <div id="wrap">
+        <div style="text-align: center;">
+            <img src="/images/cloudcity.gif" height="30%" width="30%">
+            <h1>Welcome to The Hotel</h1>
+            <hr>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img" src="/images/get-credential-logo.png" alt="">
+                            <h1>Get your Access Card</h1>
+                            <p class="card-text">Verify yourself and get yourself an access-card</p>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" id="idIssue" class="card-btn">Get Verified</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img" src="/images/verify-credential-logo.png" alt="">
+                            <h1>Verify your Access Card</h1>
+                            <p class="card-text">Confirm your access by validating your access-card</p>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" id="idVerify" class="card-btn">Verify Yourself</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img" src="/images/room-access-key.png" alt="">
+                            <h1>Check your Room</h1>
+                            <p class="card-text">Use your access-card to get access to your room.</p>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" id="room-check" class="card-btn">Get Room Access</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div> 
+        
+
+    <div class="footer">
+        <p>Verified Credentials powered Room Access Management System</p>
+    </div>
+
+    <!-- Bootstrap Scripts  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script>
+        const idIssue = document.getElementById('idIssue');
+        const idVerify = document.getElementById('idVerify');
+        const roomCheck = document.getElementById('room-check');
+
+        idIssue.addEventListener('click', () => {
+            window.location = "issuer.html";
+        });
+
+        idVerify.addEventListener('click', () => {
+            window.location = "verifier.html";
+        });
+
+        roomCheck.addEventListener('click', () => {
+            window.location = "roomDetails.html";
+        });
+    </script>
+
+</body>
+</html>

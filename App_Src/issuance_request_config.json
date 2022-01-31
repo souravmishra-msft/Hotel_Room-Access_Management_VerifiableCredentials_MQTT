@@ -1,0 +1,18 @@
+{
+  "authority": "",
+  "includeQRCode": false,
+  "registration": {
+    "clientName": ""
+  },
+  "callback": {
+    "url": "",
+    "state": "abc1234",
+    "headers": {
+      "api-key": ""
+    }
+  },
+  "issuance": {
+    "type": "VerifiedCredentialExpert",
+    "manifest": ""
+  }
+}

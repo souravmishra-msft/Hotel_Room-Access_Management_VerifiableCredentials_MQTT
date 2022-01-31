@@ -1,0 +1,25 @@
+{
+  "authority": "",
+  "includeQRCode": false,
+  "registration": {
+    "clientName": "",
+    "purpose": "The purpose why the verifier asks for one or more VCs"
+  },
+  "callback": {
+    "url": "https://soumiorg.onmicrosoft.com/api/issuer/issuanceCallback",
+    "state": "abc1234",
+    "headers": {
+      "api-key": ""
+    }
+  },
+  "presentation": {
+    "includeReceipt": true,
+    "requestedCredentials": [
+      {
+        "type": "VerifiedCredentialExpert",
+        "purpose": "the purpose why the verifier asks for a VC",
+        "acceptedIssuers": [ ]
+      }
+    ]
+  }
+}

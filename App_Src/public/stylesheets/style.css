@@ -1,0 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 80%;
+}
+
+body {
+    background-color: rgb(255 255 255);
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Fixes dropdown menus placed on the right side */
+.ml-auto {
+    left: auto !important;
+    right: 0px;
+}
+
+.navbar-custom .navbar-text {
+    color:#ffff;
+    font-size: 20px;
+    width: auto;
+}
+
+.navbar-toggler {
+    /* background-color: rgb(197, 11, 104); */
+    width: 47px;
+    height: 34px;
+    border: 2px solid #ffff;
+    border-radius: 5px;
+}
+
+.navbar-toggler .line{
+    width: 100%;
+    float: left;
+    height: 2px;
+    background-color: #ffff;
+    margin-bottom: 5px;
+}
+
+
+#wrap {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.card {
+    flex: 1 1 21rem;
+    flex-wrap: wrap;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    background: #eee;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    align-self: normal;
+}
+
+.card-img {
+    width: 50%;
+    height: 50%;
+    margin: 10px;
+}
+
+.card h4 {
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+.card p {
+    margin-bottom: 10px;
+}
+
+.card .card-btn {
+    display: inline-block;
+    background-color: #035677;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    
+}
+
+
+button {
+    background-color: #035677;
+    border: none;
+    color: white;
+    line-height: 25px;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px auto;
+    width: 250px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #05739e;
+    text-decoration: none;
+    border: none;
+}
+
+.button:disabled {
+    background: #98ddf8;
+    text-decoration: none;
+    border: none;
+    cursor: default;
+}
+
+.issuer-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-small {
+    width: 60px;
+}
+
+.qrcode canvas{
+    display: none;
+}
+
+#pinCodeText {
+    font-weight: bold;
+}
+
+.message-wrapper {
+    margin: 20px;
+    display: none;
+}
+
+
+#message {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#subject {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#btn-set {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   justify-content: center;
+}
+
+
+/* User Details Form */
+.user-details {
+    margin: 20px auto;
+    width: 300px;
+}
+
+.user-details-input-screen {
+    background-color: rgb(97, 180, 248);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-title {
+    text-align: center;
+    color: rgb(255, 254, 254);
+}
+
+.user-details-form {
+    color: #fff;
+    text-align: left;
+}
+.control-group {
+    margin-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 250px;
+    transition: border .5s;
+}
+
+input:focus {
+border: 2px solid #3498DB;
+box-shadow: none;
+}
+
+.btn {
+  border: none;
+  background: #035677;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: inline-block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #05739e;
+  border: none;
+}
+
+.verified-link {
+  font-size: 12px;
+  color: rgb(248, 246, 246);
+  display: block;
+  margin-top: 12px;
+  text-decoration: none;
+}
+
+.verified-link:hover {
+    color:rgb(150, 151, 151)
+}
+
+/* Room Details */
+
+.details-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dfdfe0;
+    /* border: 2px solid red; */
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 20px;
+    width: 100%;
+    transition: border .5s;
+    margin: 0 auto;
+}
+
+.details-box {
+    overflow: hidden;
+    margin: 20px;
+    padding: 0px;
+}
+
+.details-card ul {
+    text-align: left;
+    font-weight: bold;
+}
+
+.qr-box {
+    /* overflow: hidden; */
+    margin: 20px;
+    padding: 0px;
+    /* border: 2px solid red; */
+}
+
+.qr-box p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.qrcode-room-access {
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #202020;
+    color: #ffff;
+    text-align: center;
+}
+
+
