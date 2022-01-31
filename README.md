@@ -41,6 +41,8 @@ This prototype makes use of the Microsoft Verified Credential APIs:
 
 - Use this access-card to gain entry into the designated room.
 
+### Demo: [view demo](https://1429-49-207-197-251.ngrok.io/)
+
 ## How we built it
 
 ### Architecture Diagram
